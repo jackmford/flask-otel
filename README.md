@@ -13,4 +13,4 @@ to export data into the console.
 ## Running the collector locally
 Following [OpenTeletry's documentation](https://opentelemetry.io/docs/instrumentation/python/getting-started/) for collector config and python commands.
 
-Running the colllector locally with Docker based on [these instructions from OTel](https://opentelemetry.io/docs/collector/getting-started/#docker)
+Running the colllector locally with Docker based on [these instructions from OTel](https://opentelemetry.io/docs/collector/getting-started/#docker).
