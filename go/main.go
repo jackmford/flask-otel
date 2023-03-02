@@ -77,7 +77,7 @@ func initProvider() (func(context.Context) error, error) {
 }
 
 func randomInt(ctx context.Context) {
-	tracer := otel.Tracer("randomInt-func")
+	tracer := otel.Tracer(name)
 	_, span := tracer.Start(ctx, "randomInt")
 	rand.Seed(time.Now().UnixNano())
 	span.SetAttributes(attribute.Key("randint").Int(rand.Intn(6)))
