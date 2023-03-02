@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"math/rand"
 	"os"
 	"os/signal"
 	"time"
@@ -75,6 +76,14 @@ func initProvider() (func(context.Context) error, error) {
 	return tracerProvider.Shutdown, nil
 }
 
+func randomInt(ctx context.Context) {
+	tracer := otel.Tracer("randomInt-func")
+	_, span := tracer.Start(ctx, "randomInt")
+	rand.Seed(time.Now().UnixNano())
+	span.SetAttributes(attribute.Key("randint").Int(rand.Intn(6)))
+	defer span.End()
+}
+
 func main() {
 	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt)
 	defer cancel()
@@ -97,4 +106,6 @@ func main() {
 
 	ctx, span := tracer.Start(ctx, "Test", trace.WithAttributes(attr...))
 	defer span.End()
+
+	randomInt(ctx)
 }
